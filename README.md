@@ -1,21 +1,22 @@
 This projects aims at creating a real-time system for healh data monitoring using Azure Cloud. The potential application of this architecture is the private IoT (e.g. home-based) system that takes data from wearable devices for further processing. The architecture can be accompanied by more advanced data processing and analytics (e.g machine learning) implemented on top. 
 
-** Goals **
+**Goals**
 1. Create a template for real-time architecture to stream data using cloud services
 2. Build a backbone for further IoT system
 3. Minimize latency of sending/receiving/analyzing data
 4. Automate the data flow without human interaction
 
-** Architecture **
-The Architecture comprises of 
+**Architecture**
+![first](https://github.com/barto-official/real_time_health_readings/assets/125658269/c734ed1d-8bfe-49b9-a71c-0482cb8a2015) 
 
-** Components **
+**Components**
 1. Data Source:
    - Synthetic Data Generation in Google Collab
 2. Data Ingestion
-   - D
+   - Spark Streaming (using Google Collab) 
+   - Azure Eventhub 
 4. Data Processing:
-   - Spark Streaming
+   - Spark Streaming that filters data based on pre-defined logic to check for possible breaches that generate alerts
    - DuckDB
 5. Data Storage
    - MySQL (OLTP): transactional data
