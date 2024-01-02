@@ -1,0 +1,22 @@
+{
+  "version": "2.0",
+  "extensionBundle": {
+    "id": "Microsoft.Azure.Functions.ExtensionBundle",
+    "version": "[4.*, 5.0.0)"
+  },
+  "extensions": {
+    "eventHubs": {
+      "maxEventBatchSize" : 100,
+      "minEventBatchSize" : 25,
+      "maxWaitTime" : "00:05:00",            
+      "batchCheckpointFrequency" : 1,
+      "prefetchCount" : 300,
+      "transportType" : "amqpTcp",
+      "targetUnprocessedEventThreshold" : 75,
+      "initialOffsetOptions" : {
+          "type" : "fromStart",
+          "enqueuedTimeUtc" : ""      
+    }
+}  
+}
+}
