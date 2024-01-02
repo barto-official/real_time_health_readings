@@ -55,6 +55,16 @@ To better mimic the real-life data, synthetic data is generated using pre-defien
 
 1. Spark 3.4.1
 2. Faker — Synthetic Data Generation
+3. Matplotlib
+4. Streamlit
+5. Seaborn
+6. Mysql Conenctor
+7. Pyspark/Pyspark.sql
+8. azure-storage-blob
+9. DuckDB
+10. azure.eventhub
+11. timesynth
+    
 ---
 **Pitfalls / Limitations**
 
