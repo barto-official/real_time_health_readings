@@ -28,6 +28,9 @@ To better mimic the real-life data, synthetic data is generated using pre-defien
 ---
 **Architecture** 
 
+
+![first](https://github.com/barto-official/real_time_health_readings/assets/125658269/c734ed1d-8bfe-49b9-a71c-0482cb8a2015) 
+
 1. Data Source:
    - Synthetic Data Generation in Google Collab
    - Data sent using Spark to Eventhub
@@ -42,8 +45,10 @@ To better mimic the real-life data, synthetic data is generated using pre-defien
    - DuckDB: for fast in-memory analytical purposes
    - Blob Storage: long-term retention
 6. Data Visualization
+   - Importing data from Mysql to DuckDb
+   - Visualization using Streamlit
+<img width="443" alt="Screenshot 2024-01-02 at 21 09 38" src="https://github.com/barto-official/real_time_health_readings/assets/125658269/3ce43ca2-052f-498d-ad14-253704ecef2e">
 
-![first](https://github.com/barto-official/real_time_health_readings/assets/125658269/c734ed1d-8bfe-49b9-a71c-0482cb8a2015) 
 
 ---
 **Components**
