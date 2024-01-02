@@ -4,14 +4,22 @@ import mysql.connector
 import duckdb
 import matplotlib.pyplot as plt
 import seaborn as sns
+import io
+
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
+
+storage_account_name = os.get("storage_account_name")
+storage_account_access_key = os.get("storage_account_access_key")
+blob_service_client = BlobServiceClient(account_url=f"https://{storage_account_name}.blob.core.windows.net", credential=storage_account_access_key)
+
 
 # Connect to MySQL database
 conn_mysql = mysql.connector.connect(
-    host= BD_HOST,
-    user= BD_USER,
-    port= BD_PORT,
-    password= BD_PASSWORD,
-    database= BD_DATABASE
+    host= os.get("host"),
+    user= os.get("user"),
+    port= os.get("port"),
+    password= os.get("password"),
+    database= os.get("database")
 )
 
 cursor = conn_mysql.cursor()
@@ -114,3 +122,23 @@ if not selected_patient.empty:
 
 st.write('Daily Average Glucose Readings for Each Patient')
 plot_daily_average_glucose_per_patient()
+
+#upload to azure blob storage
+container_name = os.get("container_name")
+container_client = blob_service_client.get_container_client(container_name)
+
+#container_client.create_container()
+blob_name = "patient_id_1_testing"
+
+blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
+
+# Convert pandas DataFrame to Parquet
+parquet_io = io.BytesIO()
+aggregated_data.to_parquet(parquet_io, index=False)
+
+#print some logging for the future if automation applied
+print(f"Uploading to Azure Storage as blob:\n\t{blob_name}")
+
+parquet_io.seek(0)
+
+blob_client.upload_blob(parquet_io, blob_type="BlockBlob", overwrite=True)
