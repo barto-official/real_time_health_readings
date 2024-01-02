@@ -1,0 +1,11 @@
+# DO NOT include azure-functions-worker in this file
+# The Python Worker is managed by Azure Functions platform
+# Manually managing azure-functions-worker may cause unexpected issues
+
+azure-functions
+mysql-connector-python 
+azure-identity
+azure-mgmt-eventhub==8.0.0
+azure-mgmt-resource==15.0.0
+azure-mgmt-storage==16.0.0
+requests
