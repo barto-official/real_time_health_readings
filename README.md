@@ -39,7 +39,8 @@ To better mimic the real-life data, synthetic data is generated using pre-defien
 4. Data Processing:
    - Fetch data from Eventhub for processing using Spark in Google Collab
    - Spark Streaming that filters data based on pre-defined logic to check for possible breaches that generate alerts
-   - Current business logic for generating alerts: 
+   - Current business logic for generating alerts: Condition: (Glucose Reading > 115) OR (Rolling Window Average of 10 readings > 105)
+   - If either condition is met, send to special Evnethub. From there, Azure Function picks the data and sends to Telegram Channel.
 5. Data Storage
    - MySQL (OLTP): transactional data
    - DuckDB: for fast in-memory analytical purposes
@@ -80,5 +81,6 @@ To better mimic the real-life data, synthetic data is generated using pre-defien
 - [ ] Implement Redis database for quick lookup of patient data (data enrichment)
 - [ ] Implement further security mechanisms for data at rest/in transit
 - [ ] Create a Dedicated App for Doctors
+- [ ] Implement Jars for working with DuckDB using Spark
 
 
