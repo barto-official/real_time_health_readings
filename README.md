@@ -65,11 +65,20 @@ To better mimic the real-life data, synthetic data is generated using pre-defien
 9. DuckDB
 10. azure.eventhub
 11. timesynth
-    
+
+
+---
+**Repository**
+1. Azure Components are implemented directly in the platform (Eventhub, Blob Storage, Azure Function) so no code is maintained here (except for Azure Functions)
+2. Send/Receiving data in streaming mode should ideally be implemented in Spark, but in some cases (due to compatibility errors) pure Python is used. For production, this should be rather avoided.
+3. In 'main' folder, you can find code to generate data and send it to eventhub (generate_data notebook) and then separete notebook to read this data and filter for alerts. You can also do it in one file and directly after generating them (spark_eventhub.ipynb notebook). The code serves as a template because it needs to be adjusted to the way you generate/send data to eventhub (schema, flattening through 'explode' function etc.)
+4. I show connection to Blob storage mainly for educational purposes, the real application will vary.
+       
 ---
 **Pitfalls / Limitations**
 
 1. Current implementation is based on synthetic data generation. Ideally, data should be taken from real sources. Recommendation: Apple Health kit, Huawei Health App. In either of those two, MQTT can be used to stream data (real-time is almost impossible due to the vendor's limitations) to Azure IoT Hub which can route messages to Eventhub.
+2. Data should be generated as 1 JSON = 1 Reading = 1 Patient to allow for a rolling average in streaming mode.
 ---
 **Possible Improvements**
 
