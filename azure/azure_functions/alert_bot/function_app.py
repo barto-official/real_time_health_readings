@@ -7,8 +7,8 @@ import json
 
 app = func.FunctionApp()
 
-@app.function_name(name="device_readings")
-@app.event_hub_message_trigger(arg_name="azeventhub", event_hub_name="device_readings",
+@app.function_name(name=NAME)
+@app.event_hub_message_trigger(arg_name="azeventhub", event_hub_name=NAME,
                                connection="My_connection") 
 def device_readings(azeventhub: func.EventHubEvent):
     event_data = azeventhub.get_body().decode('utf-8')
