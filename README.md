@@ -81,6 +81,7 @@ To better mimic the real-life data, synthetic data is generated using pre-defien
 - [ ] Implement Redis database for quick lookup of patient data (data enrichment)
 - [ ] Implement further security mechanisms for data at rest/in transit
 - [ ] Create a Dedicated App for Doctors
+- [ ] Improve Visualization (potentially PowerBI)
 - [ ] Implement Jars for working with DuckDB using Spark
 
 
