@@ -46,7 +46,7 @@ Then using TimeSynth, a library used for generating synthetic time series data, 
 4. Data Processing:
    - Fetch data from Eventhub for processing using Spark in Google Collab
    - Spark Streaming that filters data based on pre-defined logic to check for possible breaches that generate alerts
-   - Current business logic for generating alerts: Condition: (Glucose Reading > 115) OR (Rolling Window Average of 10 readings > 105)
+   - Current business logic for generating alerts: Condition: Condition: (Glucose Reading > 115) OR (Rolling Window Average of 10 minutes > 105)
    - If either condition is met, send to special Evnethub. From there, Azure Function picks the data and sends to Telegram Channel.
 5. Data Storage
    - MySQL (OLTP): transactional data
