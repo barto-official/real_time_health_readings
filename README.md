@@ -54,7 +54,9 @@ Then using TimeSynth, a library used for generating synthetic time series data, 
    - Blob Storage: long-term retention
 6. Data Visualization
    - Importing data from Mysql to DuckDb
-   - Visualization using Streamlit
+   - Visualization using Streamlit (Dashboard):
+  
+     
 <img width="443" alt="Screenshot 2024-01-02 at 21 09 38" src="https://github.com/barto-official/real_time_health_readings/assets/125658269/3ce43ca2-052f-498d-ad14-253704ecef2e">
 
 
