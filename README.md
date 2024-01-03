@@ -46,15 +46,18 @@ Then using TimeSynth, a library used for generating synthetic time series data, 
 4. Data Processing:
    - Fetch data from Eventhub for processing using Spark in Google Collab
    - Spark Streaming that filters data based on pre-defined logic to check for possible breaches that generate alerts
-   - Current business logic for generating alerts: Condition: Condition: (Glucose Reading > 115) OR (Rolling Window Average of 10 minutes > 105)
+   - Current business logic for generating alerts: Condition: **Condition: (Glucose Reading > 115) OR (Rolling Window Average of 10 minutes > 105)**
    - If either condition is met, send to special Evnethub. From there, Azure Function picks the data and sends to Telegram Channel.
+   - Three Azure Functions: two for moving glucose and device data from Eventhub and write to MySQL every time new data is coming, and one for taking filtereed data and posting on Telegram channel (managing Telegram Bot)
+  <img width="350" alt="Screenshot 2024-01-03 at 10 42 45" src="https://github.com/barto-official/real_time_health_readings/assets/125658269/8672bf90-60dc-485f-b8df-d3944a1222de">
+
 5. Data Storage
    - MySQL (OLTP): transactional data
    - DuckDB: for fast in-memory analytical purposes
    - Blob Storage: long-term retention
 6. Data Visualization
-   - Importing data from Mysql to DuckDb
-   - Visualization using Streamlit (Dashboard):
+   - Importing data from Mysql to DuckDb for aggregation and analytics
+   - Visualization using Streamlit (Dashboard): showing moving average (Window=2 days) for each patient, average glucose readings, and comparison between patients.
   
      
 <img width="443" alt="Screenshot 2024-01-02 at 21 09 38" src="https://github.com/barto-official/real_time_health_readings/assets/125658269/3ce43ca2-052f-498d-ad14-253704ecef2e">
