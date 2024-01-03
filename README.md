@@ -18,9 +18,16 @@ The potential application of this architecture is the private IoT (e.g. home-bas
 ---
 **Data**
 
-To better simulate the real-life IoT Health System, two types of data are added: glucose readings (responsible for pure health data) and device data (device readings). Moreover, static (dimension) data are pre-specified and stored in MySQL. 
+Two types of data are added: glucose readings (responsible for pure health data) and device data (device readings). Moreover, static (dimension) data are pre-specified and stored in MySQL. 
 
-To better mimic the real-life data, synthetic data is generated using pre-defiend patient profiles (based on possible glucose levels): diabetic, athlete, party-goer, low-glucose, elderly
+To better mimic the real-life data, synthetic data is generated using pre-defiend patient profiles (based on possible glucose levels): 
+* Diabetic: Higher readings.
+* Athlete: Lower post-exercise readings.
+* Party-goer: Variable readings.
+* Low-glucose: Dangerously low readings.
+* Elderly: Steady/higher readings.
+
+Then using TimeSynth, a library used for generating synthetic time series data, is used to sample a regular time point and creates a sinusoidal signal with added Gaussian noise. This setup is used to simulate the natural fluctuations in glucose levels over time.
 
 ![Glucose2](https://github.com/barto-official/real_time_health_readings/assets/125658269/6e1775a3-903f-49d1-b611-cae925c44896)
 
@@ -33,7 +40,7 @@ To better mimic the real-life data, synthetic data is generated using pre-defien
 
 1. Data Source:
    - Synthetic Data Generation in Google Collab
-   - Data sent using Spark to Eventhub
+   - Data sent using Spark/Python to Eventhub
 2. Data Ingestion
    - Azure Eventhub Namespace with three eventhubs: alerts, glucose_readings, device_readings
 4. Data Processing:
@@ -72,13 +79,14 @@ To better mimic the real-life data, synthetic data is generated using pre-defien
 1. Azure Components are implemented directly in the platform (Eventhub, Blob Storage, Azure Function) so no code is maintained here (except for Azure Functions)
 2. Send/Receiving data in streaming mode should ideally be implemented in Spark, but in some cases (due to compatibility errors) pure Python is used. For production, this should be rather avoided.
 3. In 'main' folder, you can find code to generate data and send it to eventhub (generate_data notebook) and then separete notebook to read this data and filter for alerts. You can also do it in one file and directly after generating them (spark_eventhub.ipynb notebook). The code serves as a template because it needs to be adjusted to the way you generate/send data to eventhub (schema, flattening through 'explode' function etc.)
-4. I show connection to Blob storage mainly for educational purposes, the real application will vary.
+4. I show connection to Blob storage mainly for educational purposes, the real application and type of file to be sent will vary.
        
 ---
 **Pitfalls / Limitations**
 
 1. Current implementation is based on synthetic data generation. Ideally, data should be taken from real sources. Recommendation: Apple Health kit, Huawei Health App. In either of those two, MQTT can be used to stream data (real-time is almost impossible due to the vendor's limitations) to Azure IoT Hub which can route messages to Eventhub.
 2. Data should be generated as 1 JSON = 1 Reading = 1 Patient to allow for a rolling average in streaming mode.
+3. In some cases, Spark Streaming is replaced by Python due to compatibility issues with other libraries/Azure.
 ---
 **Possible Improvements**
 
