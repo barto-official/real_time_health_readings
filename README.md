@@ -98,6 +98,7 @@ Then using TimeSynth, a library used for generating synthetic time series data, 
 - [ ] Implement Redis database for quick lookup of patient data (data enrichment)
 - [ ] Implement further security mechanisms for data at rest/in transit
 - [ ] Create a Dedicated App for Doctors
+- [ ] Implement Dead-Letter Queue
 - [ ] Improve Visualization (potentially PowerBI)
 - [ ] Implement Jars for working with DuckDB using Spark
 
